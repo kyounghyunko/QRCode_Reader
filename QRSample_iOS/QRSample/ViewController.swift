@@ -16,6 +16,13 @@ final class ViewController: UIViewController {
     // start/stopのためにプロパティ変数として宣言しておく
     private let session = AVCaptureSession()
     
+    // IBOutlet
+    @IBOutlet private weak var QRCodeInfoView: UIView! {
+        didSet {
+            self.QRCodeInfoView.layer.cornerRadius = self.QRCodeInfoView.frame.height / 2
+        }
+    }
+    
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
@@ -51,7 +58,7 @@ final class ViewController: UIViewController {
                         let previewLayer = AVCaptureVideoPreviewLayer(session: self.session)
                         previewLayer.frame = self.view.frame
                         previewLayer.videoGravity = .resizeAspectFill
-                        self.view.layer.addSublayer(previewLayer)
+                        self.view.layer.insertSublayer(previewLayer, at: 0)
                         
                         // 読み取り開始
                         self.session.startRunning()
